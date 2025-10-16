@@ -16,8 +16,11 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.brunoabreu.front_gestao_vagas.modules.candidate.service.CandidateService;
+import br.com.brunoabreu.front_gestao_vagas.modules.candidate.service.FindJobService;
 import br.com.brunoabreu.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -29,6 +32,9 @@ public class CandidateController {
 
     @Autowired
     private ProfileCandidateService profileCandidateService;
+
+    @Autowired
+    private FindJobService findJobService;
 
     @GetMapping("/login")
     public String login(){
@@ -61,11 +67,34 @@ public class CandidateController {
     @PreAuthorize("hasRole('CANDIDATE')")
     public String profile(Model model){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var user = this.profileCandidateService.execute(authentication.getDetails().toString());
+        try{
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            var user = this.profileCandidateService.execute(authentication.getDetails().toString());
 
-        model.addAttribute("user", user);
-        return "candidate/profile";
+            model.addAttribute("user", user);
+            return "candidate/profile";
+        } catch(HttpClientErrorException e){
+            return "redirect:/candidate/login";
+        }
     }
-    
+
+    @GetMapping("/jobs")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    public String jobs(Model model, String filter) {
+
+        try {
+            if (filter != null) {
+                this.findJobService.execute(getToken(),filter);
+            }
+        } catch (HttpClientErrorException e) {
+            return "redirect:/candidate/login";
+
+        }
+        return "candidate/jobs";
+    }
+
+    private String getToken(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getDetails().toString();
+    }
 }
