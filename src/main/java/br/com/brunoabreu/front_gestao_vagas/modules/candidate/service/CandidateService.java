@@ -26,6 +26,8 @@ public class CandidateService {
         HttpEntity<Map<String, String>> request = new HttpEntity<>(data);
 
         var result = rt.postForObject("http://localhost:8080/candidate/auth", request, Token.class);
+
+        System.out.println(result);
         
         return result;
     }
