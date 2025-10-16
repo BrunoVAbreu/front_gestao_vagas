@@ -1,7 +1,9 @@
 package br.com.brunoabreu.front_gestao_vagas.modules.candidate.service;
 
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -11,12 +13,12 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.brunoabreu.front_gestao_vagas.modules.candidate.dto.ProfileUserDTO;
+import br.com.brunoabreu.front_gestao_vagas.modules.candidate.dto.JobDTO;
 
 @Service
 public class FindJobService {
 
-    public String execute(String token, String filter) {
+    public List<JobDTO> execute(String token, String filter) {
         RestTemplate rt = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
@@ -25,9 +27,10 @@ public class FindJobService {
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://localhost:8080/candidate/job").queryParam("filter", filter);
 
+        ParameterizedTypeReference<List<JobDTO>> responseType = new ParameterizedTypeReference<List<JobDTO>>(){};
+            
         try {
-            var result = rt.exchange(builder.toUriString(), HttpMethod.GET, request, String.class);
-            System.out.println(result);
+            var result = rt.exchange(builder.toUriString(), HttpMethod.GET, request, responseType);
             return result.getBody();
         } catch (Exception ex) {
             throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);

@@ -19,7 +19,6 @@ import br.com.brunoabreu.front_gestao_vagas.modules.candidate.service.CandidateS
 import br.com.brunoabreu.front_gestao_vagas.modules.candidate.service.FindJobService;
 import br.com.brunoabreu.front_gestao_vagas.modules.candidate.service.ProfileCandidateService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -82,9 +81,13 @@ public class CandidateController {
     @PreAuthorize("hasRole('CANDIDATE')")
     public String jobs(Model model, String filter) {
 
+        System.out.println("Valor do filtro "+ filter);
         try {
             if (filter != null) {
-                this.findJobService.execute(getToken(),filter);
+
+                var jobs = this.findJobService.execute(getToken(),filter);
+                model.addAttribute("jobs", jobs);
+
             }
         } catch (HttpClientErrorException e) {
             return "redirect:/candidate/login";
