@@ -5,7 +5,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import br.com.brunoabreu.front_gestao_vagas.modules.company.dto.CreateCompanyDTO;
 
 @Service
