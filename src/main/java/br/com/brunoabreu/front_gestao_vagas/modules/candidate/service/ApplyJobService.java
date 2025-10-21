@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ApplyJobService {
     public String execute (String token,UUID idJob){
-RestTemplate rt = new RestTemplate();
+    RestTemplate rt = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
