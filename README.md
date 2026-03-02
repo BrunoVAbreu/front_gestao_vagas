@@ -30,18 +30,18 @@
 
 <h2 id="about">📖 Sobre</h2>
 
-O **Gestão de Vagas Frontend** é uma aplicação Spring Boot com Thymeleaf que atua como camada de apresentação, consumindo a [API REST do backend](https://github.com/seu-usuario/gestao-vagas). Possui fluxos distintos para dois perfis de usuário:
+O **Gestão de Vagas Frontend** é uma aplicação Spring Boot com Thymeleaf que atua como camada de apresentação, consumindo a [API REST do backend](https://github.com/BrunoVAbreu/gestao_vagas/). Possui fluxos distintos para dois perfis de usuário:
 
 - **Empresa** — login, cadastro, criação e listagem de vagas.
 - **Candidato** — login, cadastro, visualização de perfil, busca e candidatura em vagas.
 
-> ⚠️ **O backend precisa estar rodando** antes de iniciar o frontend. Consulte o [repositório do backend](https://github.com/seu-usuario/gestao-vagas) para instruções de execução.
+> ⚠️ **O backend precisa estar rodando** antes de iniciar o frontend. Consulte o [repositório do backend](https://github.com/BrunoVAbreu/gestao_vagas/) para instruções de execução.
 
 <h2 id="repos">🔗 Repositórios do Projeto</h2>
 
 | Repositório | Descrição |
 |-------------|-----------|
-| [**Backend**](https://github.com/seu-usuario/gestao-vagas) | API REST com Spring Boot |
+| [**Backend**](https://github.com/BrunoVAbreu/gestao_vagas/) | API REST com Spring Boot |
 | **Frontend** (este repo) | Interface web com Spring Boot + Thymeleaf |
 
 <h2 id="started">🚀 Como executar</h2>
@@ -56,7 +56,7 @@ O **Gestão de Vagas Frontend** é uma aplicação Spring Boot com Thymeleaf que
 <h3 id="cloning">Clonando</h3>
 
 ```bash
-git clone https://github.com/seu-usuario/front-gestao-vagas.git
+git clone https://github.com/BrunoVAbreu/front_gestao_vagas.git
 cd front-gestao-vagas
 ```
 
